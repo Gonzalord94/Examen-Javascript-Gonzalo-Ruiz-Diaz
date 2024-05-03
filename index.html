@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERDULERIA</title>
+</head>
+
+<body>
+    <h1>VERDULERIA 🍌🍎🍊🍐</h1>
+        
+    <input type="text" id="inputFruta" placeholder="Nombre de la fruta">
+    <input type="number" id="inputCantidad" placeholder="Cantidad kg">
+    <button onclick="agregarFruta()">Agregar</button>
+    <p style="font-weight: bold;">Listado de Frutas: </p>
+    <div id="listaFrutas"></div>
+    <p style="font-weight: bold;">Total: <span id="totalFrutas">0</span></p>
+                                         
+</body>
+      
+<script>
+
+let miJson = [
+        {
+            nombre: "manzana",
+            cantidad: 50
+        },
+        {
+            nombre: "banana",
+            cantidad: 30
+        },
+        { 
+            nombre: "naranja",
+            cantidad: 0
+        },
+        {    
+            nombre: "pera",
+            cantidad: 10
+        }
+                
+         
+    ]
+    for (let index = 0; index < miJson.length; index++) {
+            let cantidad = miJson[index].cantidad
+            console.log(cantidad)
+            
+        }
+       
+    let frutas = []; 
+    let totalCantidad = 0; 
+
+    function agregarFruta() {
+        const nombreFruta = document.getElementById("inputFruta").value.trim();
+        const cantidad = parseInt(document.getElementById("inputCantidad").value);
+
+        if (nombreFruta && !isNaN(cantidad) && cantidad > 0) {
+            frutas.push({ nombre: nombreFruta, cantidad: cantidad }); 
+            actualizarListaFrutas(nombreFruta, cantidad);
+            actualizarTotalCantidad(cantidad);
+            limpiarInputs();
+        } else {
+            alert("El campo cantidad es requerido");
+        }
+    }
+
+    function actualizarListaFrutas(nombre, cantidad) {
+        const listaFrutasElemento = document.getElementById("listaFrutas");
+        const frutaElemento = document.createElement("p");
+        frutaElemento.textContent = `${nombre} ${cantidad} kg`;
+        listaFrutasElemento.appendChild(frutaElemento);
+    }
+ 
+ 
+    function actualizarTotalCantidad(cantidad) {
+        totalCantidad += cantidad;
+        let mensajeTotal = `Usted tiene ${totalCantidad} kg`;
+        document.getElementById("totalFrutas").textContent = mensajeTotal;
+}
+
+    function limpiarInputs() {
+        document.getElementById("inputFruta").value = "";
+        document.getElementById("inputCantidad").value = "";
+    }
+
+
+ </script>
+
+
+</html>
